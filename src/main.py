@@ -15,7 +15,7 @@ def encode(input_path: Path, output_path: Path = None, file_format: str = "png")
 
 
 @app.command()
-def decode(input_path: Path, output_path: Path):
+def decode(input_path: Path, output_path: Path = None):
     """convert an image to a file"""
 
     return img2file(input_path, output_path)
