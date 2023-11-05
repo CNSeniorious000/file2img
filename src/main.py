@@ -8,7 +8,7 @@ app = Typer()
 
 
 @app.command()
-def encode(input_path: Path, output_path: Path = None, file_format: str = "webp"):
+def encode(input_path: Path, output_path: Path = None, file_format: str = "png"):
     """convert a file to an image"""
 
     return file2img(input_path, output_path or input_path.with_suffix(f".{file_format}"), file_format)

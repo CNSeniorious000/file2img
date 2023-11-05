@@ -18,7 +18,7 @@ def encode(data, file_format: Literal["png", "webp"]):
     buffer = np.zeros((img_size, img_size, 3), np.uint8)
     buffer.ravel()[:length] = np.frombuffer(data, dtype=np.uint8)
 
-    return imwrite("<bytes>", buffer, extension=f".{file_format}")
+    return imwrite("<bytes>", buffer, extension=f".{file_format}", lossless=True)
 
 
 def decode(data):
