@@ -1,0 +1,21 @@
+[project]
+authors = [{ name = "Muspi Merol", email = "me@muspimerol.site" }]
+dependencies = ["numpy>=1.25", "imageio>=2.31", "typer>=0.9", "msgspec>=0.18"]
+requires-python = ">=3.10,<3.13"
+readme = "README.md"
+license = { text = "MIT" }
+
+[tool.pdm.scripts]
+cli = { call = "src.main:app" }
+enc = { composite = ["cli encode"] }
+dec = { composite = ["cli decode"] }
+fmt = { composite = ["black .", "isort ."] }
+
+[tool.pdm.dev-dependencies]
+dev = ["isort>=5", "black>=23"]
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"

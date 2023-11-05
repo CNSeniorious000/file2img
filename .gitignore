@@ -1,0 +1,6 @@
+__pycache__
+.venv
+pdm.lock
+.pdm-python
+*.png
+*.webp
