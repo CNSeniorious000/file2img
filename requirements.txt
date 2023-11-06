@@ -2,3 +2,4 @@ numpy
 imageio
 msgspec
 fastapi[all]
+httpx[http2]
