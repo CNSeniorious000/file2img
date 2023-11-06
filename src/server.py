@@ -5,6 +5,7 @@ from urllib.parse import quote
 from fastapi import FastAPI, File, Response, UploadFile
 from httpx import Client
 from pydantic import HttpUrl
+from starlette.middleware.cors import CORSMiddleware
 
 from .core import decode, encode
 
@@ -50,3 +51,6 @@ def url2img(url: HttpUrl, file_format: Literal["webp", "png"] = "png", filename:
 def url2file(url: HttpUrl):
     data_in = client.get(str(url), headers={"accept": "image/*"}).read()
     return _decode_data(data_in)
+
+
+app.add_middleware(CORSMiddleware, allow_origins="*", allow_credentials=True, allow_methods="*", allow_headers="*")
