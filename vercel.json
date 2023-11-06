@@ -1,0 +1,5 @@
+{
+  "builds": [{ "src": "src/server.py", "use": "@vercel/python" }],
+  "rewrites": [{ "source": "/(.*)", "destination": "src/server.py" }],
+  "redirects": [{ "source": "/", "destination": "/docs" }]
+}

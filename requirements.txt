@@ -1,0 +1,4 @@
+numpy
+imageio
+msgspec
+fastapi[all]

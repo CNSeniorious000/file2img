@@ -4,3 +4,4 @@ pdm.lock
 .pdm-python
 *.png
 *.webp
+.vercel

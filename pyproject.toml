@@ -7,7 +7,7 @@ dependencies = [
     "msgspec>=0.18",
     "fastapi[all]>=0.104",
 ]
-requires-python = ">=3.10,<3.13"
+requires-python = ">=3.9,<3.13"
 readme = "README.md"
 license = { text = "MIT" }
 

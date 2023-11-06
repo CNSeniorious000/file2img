@@ -1,6 +1,6 @@
 from math import ceil
 from pathlib import Path
-from typing import Literal
+from typing import Literal, Optional
 
 import numpy as np
 from imageio.v3 import imread, imwrite
@@ -8,7 +8,7 @@ from imageio.v3 import imread, imwrite
 from .metadata import decode_meta, encode_meta
 
 
-def encode(data, file_format: Literal["png", "webp"], filename: str | None = None):
+def encode(data, file_format: Literal["png", "webp"], filename: Optional[str] = None):
     data = encode_meta(len(data), filename) + b"\n" + data
     length = len(data)
 
@@ -33,6 +33,6 @@ def file2img(path_in: Path, path_out: Path, file_format: Literal["png", "webp"])
     path_out.write_bytes(encode(data, file_format, path_in.name))
 
 
-def img2file(path_in: Path, path_out: Path | None):
+def img2file(path_in: Path, path_out: Optional[Path]):
     data, meta = decode(path_in.read_bytes())
     (path_out or Path(meta.filename)).write_bytes(data)
