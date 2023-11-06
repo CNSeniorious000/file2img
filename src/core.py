@@ -7,8 +7,10 @@ from imageio.v3 import imread, imwrite
 
 from .metadata import decode_meta, encode_meta
 
+Format = Literal["png", "webp"]
 
-def encode(data, file_format: Literal["png", "webp"], filename: Optional[str] = None):
+
+def encode(data, file_format: Format, filename: Optional[str] = None):
     data = encode_meta(len(data), filename) + b"\n" + data
     length = len(data)
 
@@ -28,7 +30,7 @@ def decode(data):
     return data[: meta.length], meta
 
 
-def file2img(path_in: Path, path_out: Path, file_format: Literal["png", "webp"]):
+def file2img(path_in: Path, path_out: Path, file_format: Format):
     data = path_in.read_bytes()
     path_out.write_bytes(encode(data, file_format, path_in.name))
 

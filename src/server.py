@@ -1,5 +1,5 @@
 from mimetypes import guess_type
-from typing import Literal, Optional
+from typing import Optional
 from urllib.parse import quote
 
 from fastapi import FastAPI, File, Response, UploadFile
@@ -7,7 +7,7 @@ from httpx import Client
 from pydantic import HttpUrl
 from starlette.middleware.cors import CORSMiddleware
 
-from .core import decode, encode
+from .core import Format, decode, encode
 
 app = FastAPI()
 client = Client(http2=True)
@@ -30,7 +30,7 @@ def _decode_data(data_in: bytes):
 
 
 @app.post("/encode")
-def file2img(file: UploadFile = File(), file_format: Literal["webp", "png"] = "png"):
+def file2img(file: UploadFile = File(), file_format: Format = "png"):
     data_in = file.file.read()
     return _encode_data(data_in, file_format, file.filename)
 
@@ -41,7 +41,7 @@ def img2file(img: bytes = File()):
 
 
 @app.get("/encode")
-def url2img(url: HttpUrl, file_format: Literal["webp", "png"] = "png", filename: Optional[str] = None):
+def url2img(url: HttpUrl, file_format: Format = "png", filename: Optional[str] = None):
     res = client.get(str(url))
     filename = filename or (res.headers.get("content-disposition") or "").split(";", 1)[-1].split("=", 1)[-1].strip('"') or str(res.url).strip("/").rsplit("/", 1)[-1]
     return _encode_data(res.read(), file_format, filename)
