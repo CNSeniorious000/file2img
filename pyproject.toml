@@ -2,7 +2,7 @@
 authors = [{ name = "Muspi Merol", email = "me@muspimerol.site" }]
 dependencies = [
     "numpy>=1.25",
-    "imageio>=2.31",
+    "imageio>=2.32",
     "typer>=0.9",
     "msgspec>=0.18",
     "fastapi[all]>=0.104",
@@ -23,7 +23,7 @@ dev = "uvicorn src.server:app --reload"
 dev = ["isort>=5", "black>=23"]
 
 [tool.black]
-line-length = 180
+line-length = 200
 
 [tool.isort]
 profile = "black"

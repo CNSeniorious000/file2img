@@ -15,7 +15,7 @@ client = Client(http2=True)
 
 def _encode_data(data_in: bytes, file_format: str, filename: str):
     data_out = encode(data_in, file_format, filename)
-    headers = {"x-size-input": str(len(data_in)), "x-size-out": str(len(data_out)), "content-disposition": f"inline; filename={quote(filename)}.{file_format}"}
+    headers = {"x-size-in": str(len(data_in)), "x-size-out": str(len(data_out)), "content-disposition": f"inline; filename={quote(filename)}.{file_format}"}
     return Response(data_out, media_type=f"image/{file_format}", headers=headers)
 
 
@@ -25,7 +25,7 @@ def _decode_data(data_in: bytes):
     return Response(
         data,
         media_type=guess_type(filename)[0] if filename else "application/octet-stream",
-        headers={"content-disposition": f"{'inline' if filename.startswith('text') else 'attachment'}; filename={quote(filename)}"} if filename else {},
+        headers={"content-disposition": f"{'inline' if filename.startswith('text') or filename.startswith('image') else 'attachment'}; filename={quote(filename)}"} if filename else {},
     )
 
 
